@@ -1,0 +1,22 @@
+if(isset($_POST['update_cars'])){
+    // echo "<pre>";
+    // var_dump($_POST);
+    // exit;
+    $car_plate=$_POST['plate_no'];
+    $plate=$_POST['plate'];
+    $model=$_POST['car_model'];
+    $color=$_POST['car_color'];
+    $price=$_POST['price'];
+
+    
+
+    if(isset($FILES['car_img'])) {
+    $image_file=$_FILES['car_img'];
+    $tmp_name=$image_file['tmp_name'];
+    $img_name=$image_file['name'];
+
+    move_uploaded_file($tmp_name, 'storage/cars_pic/'.$img_name);
+    }
+
+    $query = "UPDATE cars SET plate= $plate , model='$model', color='$color', price ='$price', image='$img_name' WHERE plate=$car_plate";
+    $check =$db_connection->query($query);
